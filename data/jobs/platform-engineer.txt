@@ -1,0 +1,21 @@
+Senior Backend Engineer, Payments Platform
+Northwind Ledger · Remote (US)
+
+Northwind Ledger builds the ledger behind a card-issuing API. We are hiring a senior backend engineer to own payment posting, schema design, and the production Kubernetes platform those services run on.
+
+What you'll do
+- Design and run backend services that post payments to a double-entry ledger.
+- Carry on-call for production incidents.
+- Review designs with engineers earlier in their career.
+
+What you bring
+- 5+ years building backend services in Go or Python.
+- Production experience operating Kubernetes.
+- A track record with payment, ledger, or other financial transaction systems.
+- Strong PostgreSQL skills, including schema design.
+- On-call ownership of a production service.
+- A bachelor's degree from a university, in any field.
+
+Preferred
+- Event-driven systems, especially Kafka.
+- You have mentored other engineers.

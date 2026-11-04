@@ -1,0 +1,26 @@
+Amina Shah
+Senior Backend Engineer
+amina.shah@example.com · (415) 555-0148 · Oakland, CA
+
+Summary
+Backend engineer with 8 years building backend services in Go and Python.
+She led the migration of billing onto production Kubernetes.
+
+Experience
+Harbor Stack — Senior Backend Engineer
+2019 - 2024 · Oakland, CA
+- Own the card payments API, posting each captured charge to an internal ledger and reconciling settlement files nightly.
+- Designed PostgreSQL schemas for double-entry ledger tables, including idempotency keys and monthly partitioning.
+- Ran production Kubernetes clusters for the payments namespace and carried the on-call rotation for billing.
+- Introduced Kafka topics for authorization events so downstream fraud checks no longer poll the database.
+- Mentored four engineers, two of whom now lead services of their own.
+
+Lumen Pay — Software Engineer
+2016 - 2019 · San Francisco, CA
+- Built Python services that priced interchange fees and published transaction events.
+
+Education
+B.S. in Computer Science, University of Waterloo, 2016
+
+Skills
+Go, Python, PostgreSQL, Kubernetes, Kafka, gRPC

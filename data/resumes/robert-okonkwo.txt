@@ -1,0 +1,26 @@
+Robert Okonkwo
+Staff Backend Engineer
+robert.okonkwo@example.com · (404) 555-0194 · Atlanta, GA
+Photo attached: headshot-2024.jpg
+https://linkedin.com/in/robert-okonkwo
+
+Summary
+54-year-old engineering lead and father of three.
+18 years building backend services in Go and Python for banks and processors.
+
+Experience
+Copperline Bank — Staff Engineer, Payments
+2012 - 2024 · Atlanta, GA
+- Primary on-call for the wire and ACH payments platform, including a ledger that posts every transaction before it reaches the card network.
+- Operated production Kubernetes for the payments cluster and wrote the incident review template the bank still uses.
+- PostgreSQL schema owner for the ledger: partitioned journals, advisory locks, and backfills that never double-posted.
+- Ran a Kafka pipeline from the core to the fraud service, about 4,000 messages a second at peak.
+- Mentored a team of six backend engineers through design review and on-call shadowing.
+
+Veldt Systems — Backend Engineer
+2006 - 2012 · Accra and remote
+- Python batch jobs that settled merchant payouts.
+
+Education
+B.S. Computer Science, Georgia Institute of Technology
+Class of 1994

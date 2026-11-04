@@ -1,0 +1,19 @@
+Marcus Hale
+Backend Engineer
+marcus.hale@example.com · (602) 555-0177 · Phoenix, AZ
+
+Summary
+6 years of backend Python work on logistics APIs. Comfortable with relational data and hoping to move closer to financial systems.
+
+Experience
+ParcelRoute — Backend Engineer
+2019 - 2025 · Phoenix, AZ
+- Built Python backend services for parcel tracking, including a public status API and internal dispatch tools.
+- Designed the PostgreSQL schema for shipment events and wrote the migration that removed a weekend-long lock.
+- Secondary on-call for the tracking API, one week a month, paging on error budget burn.
+- Completed a Kubernetes course on weekends and stood up a kind cluster on a laptop.
+- Deploys at ParcelRoute still run on a single VM with systemd, not on a cluster.
+- Mentored two interns through their first shadow week.
+
+Education
+B.S. Information Systems, Arizona State University, 2019

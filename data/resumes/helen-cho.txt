@@ -1,0 +1,21 @@
+Helen Cho
+Frontend Engineer
+helen.cho@example.com · (650) 555-0114 · Palo Alto, CA
+
+Summary
+Frontend engineer with 2 years of professional experience, mostly React and design systems.
+Volunteer mentor for women in engineering.
+
+Experience
+Kindred Feed — Frontend Engineer
+2023 - 2025 · Palo Alto, CA
+- Shipped the React design system used by the consumer web app, including the composer and notification inbox.
+- Partnered with a backend teammate who owned the API; my work stopped at the TypeScript client.
+- Completed backend coursework in Python during a company learning week. I have not operated live services.
+
+Sable Analytics — Intern
+Summer 2022
+- Built charts in React for a marketing dashboard.
+
+Education
+Stanford University

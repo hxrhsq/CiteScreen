@@ -1,0 +1,21 @@
+Diego Alvarez
+Junior Software Engineer
+diego.alvarez@example.com · (702) 555-0162 · Las Vegas, NV
+
+Summary
+I am a 28-year-old career switcher who finished a 16-week bootcamp and wants a first server-side role.
+3 years of Python, counting freelance sites and the bootcamp.
+
+Experience
+Basin Labs — Intern, Software
+Summer 2024 · Las Vegas, NV
+- Extended a Flask admin tool and wrote SQL against a PostgreSQL database another team owned.
+- Pair-programmed on a schema change for the internal inventory table.
+
+Freelance
+2022 - 2024
+- Marketing sites in HTML and CSS for local shops.
+
+Education
+B.S. Computer Science, University of Nevada, Reno, 2022
+Red Mesa Bootcamp, certificate, 2024
