@@ -173,6 +173,50 @@ Production serves `node .next/standalone/server.js` after `npm run build`. The D
 
 Do not bake `VULTR_API_KEY` into the image. Pass it at runtime.
 
+## What runs on Vultr
+
+| Vultr service | Where it is used |
+| --- | --- |
+| **Cloud Compute** | The VM that runs this container. It is the whole backend: parsing, rubric, evidence search, scoring, redaction, fairness delta, audit log. Listens on `43123`, published behind the host's port 80/443. |
+| **Serverless Inference** | `src/lib/screening/llm.ts`, through the official `openai` client pointed at `https://api.vultrinference.com/v1`. Live mode only. Two call sites: requirement extraction for a job that has no curated rubric, and quote proposals for each requirement. |
+| GPU | Not used. This product needs no local model weights, which is why a small VM is enough. |
+
+One request, end to end:
+
+```
+recruiter's browser
+  → VM :43123  /api/screen
+    → parse PDF/DOCX/TXT in memory (never written to disk)
+    → rubric            (curated, or Serverless Inference in live mode)
+    → quote proposals   (local line search in mock, Serverless Inference in live)
+    → verbatim check    ← the server rejects any quote that is not a substring
+    → deterministic score and ranking
+    → redacted copy → same pipeline again → fairness delta
+    → audit log (append-only; export CSV or JSON)
+```
+
+### Scope, stated plainly
+
+The model is asked for text only. It never assigns a number, never opens a file, never runs a command, and never contacts anything outside the VM. **By default the only outbound call this server makes is to `api.vultrinference.com`** (`VULTR_BASE_URL` overrides it, and nothing else in `src/` opens a network connection). There is no code execution, no browser automation, and no write-back to any third-party system. A recommendation moves a candidate nowhere until a recruiter confirms it, and an override requires a note.
+
+### Prove the deployment is live, not mock
+
+`GET /api/health` reports the mode the server actually resolved:
+
+```bash
+curl -s https://<your-demo-host>/api/health | grep -o '"mode":"[a-z]*"'
+# "mode":"live"  → key present, Serverless Inference in use
+# "mode":"mock"  → no key on the server; the app still works, deterministically
+```
+
+If you set `SCREENING_MODE=live` without a key, the API returns 400 rather than silently falling back — so a live-labelled demo cannot quietly degrade into mock. To confirm a real inference call happened, score a job that has no curated rubric (anything other than the two sample packets) and watch the VM's request log for the call to `api.vultrinference.com`.
+
+Cost for the demo: one live screening of 6 resumes makes **13 inference calls** — 1 to extract the rubric, then 2 per candidate (`pipeline.ts:194-195`, the original resume and its redacted copy). Add the requirement count and each call carries a few hundred tokens in and out. On `deepseek-v4.1-flash-1017` the whole run is a fraction of a cent, so the $200 credit is not a constraint. Re-scoring repeatedly is cheap; do it as often as you like while presenting.
+
+### Files that must stay out of the repo
+
+`.env` holds the key and is ignored by `.gitignore`. `.env.example` is the committed template and contains no secret. The key lives only in the VM's environment; the browser never sends one and the server scrubs it from error text (`scrubSecrets` in `src/lib/config.ts`).
+
 ## 中文说明
 
 CiteScreen 是给招聘人员用的循证简历预筛工具，参加 lablab.ai Vultr Agent Rush，赛道是「Powering the Future of Work」（人力资源与招聘）。它不替人做最终决定。
