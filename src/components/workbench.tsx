@@ -74,6 +74,17 @@ function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : "Something went wrong.";
 }
 
+/** UUID when the page is a secure context; otherwise a random+time id (plain HTTP). */
+function newId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    // Random segment first so upload/paste ids (first 8 chars) still differ within a millisecond.
+    const rand = Math.random().toString(36).slice(2, 10).padEnd(8, "0");
+    return `${rand}${Date.now().toString(36)}`;
+  }
+}
+
 async function postJson<T>(url: string, body: unknown): Promise<T> {
   const response = await fetch(url, {
     method: "POST",
@@ -351,7 +362,7 @@ export function Workbench() {
         const data = (await response.json().catch(() => ({}))) as { error?: string; name?: string; text?: string; filename?: string };
         if (!response.ok || !data.text) throw new Error(data.error || `Could not read ${file.name}.`);
         added.push({
-          id: `upload-${crypto.randomUUID().slice(0, 8)}`,
+          id: `upload-${newId().slice(0, 8)}`,
           name: data.name || file.name,
           text: data.text,
           filename: data.filename || file.name,
@@ -377,7 +388,7 @@ export function Workbench() {
     const first = text.split("\n").map((line) => line.trim()).find(Boolean) ?? "Pasted resume";
     setCandidates((current) => [
       ...current,
-      { id: `paste-${crypto.randomUUID().slice(0, 8)}`, name: pasteName.trim() || first.slice(0, 80), text },
+      { id: `paste-${newId().slice(0, 8)}`, name: pasteName.trim() || first.slice(0, 80), text },
     ].slice(0, 8));
     setPasteOpen(false);
     setPasteName("");
@@ -394,7 +405,7 @@ export function Workbench() {
       return;
     }
     const event: AuditEvent = {
-      id: crypto.randomUUID(),
+      id: newId(),
       at: new Date().toISOString(),
       jobTitle: report.jobTitle,
       candidateId: selected.candidateId,
